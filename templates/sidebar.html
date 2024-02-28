@@ -1,0 +1,33 @@
+<div id="sideContainer" class="side-container">
+    {% if PAGE_TITLE == SITE_TITLE %}
+    <a class="a-block nav-head active" href="{{ SITEURL }}">
+    {% else %}
+    <a class="a-block nav-head false" href="{{ SITEURL }}">
+    {% endif %}
+        <div class="nav-title">
+            {{ SITE_TITLE }}
+        </div>
+        {% if SITE_SUBTITLE %}
+        <div class="nav-subtitle">
+            {{ SITE_SUBTITLE }}
+        </div>
+        {% endif %}
+    </a>
+
+    <div class="nav-link-list">
+        {% for item in MENUITEMS %}
+            {% set actived = "false" %}
+            {% if request.path == item.1 %}
+                {% set actived = "active" %}
+            {% endif %}
+            <a class="a-block nav-link-item {{ actived }}" href="{{ item.1 | url }}">
+                {{ item.0 }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="nav-footer">
+        <!-- Vous pouvez inclure ici du contenu statique ou utiliser un include Jinja2 pour un footer personnalisé -->
+        {% include "copyright.html" %}
+    </div>
+</div>
