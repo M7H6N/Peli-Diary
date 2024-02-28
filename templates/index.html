@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="post-list-container post-list-container-no-background">
+    {% for article in articles %}
+        <a href="{{ SITEURL }}/{{ article.url }}" class="a-block">
+            <div class="post-item-wrapper">
+                <div class="post-item post-item-no-divider">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title">
+                            {{ article.title }}
+                        </div>
+                        <div class="post-item-summary">
+                            {% if article.summary %}
+                                {{ article.summary }}
+                            {% endif %}
+                        </div>
+                        <!-- Vous devrez créer un include pour post-item-meta.html adapté pour Pelican -->
+                        {% include "post-item-meta.html" %}
+                    </div>
+                    {% if article.metadata.featured_image %}
+                        <div class="post-item-image-wrapper">
+                            <div class="post-item-image"
+                                 style="background-image: url('{{ SITEURL }}/{{ article.metadata.featured_image }}')">
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+{% end %}

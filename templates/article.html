@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="post-list-container post-list-container-shadow">
+    <div class="post">
+        {% set post_class = "post-head-wrapper-text-only" %}
+        {% if article.featured_image %}
+            {% set post_class = "post-head-wrapper" %}
+        {% endif %}
+
+        <div class="{{ post_class }}"
+            {% if article.featured_image %}
+                style="background-image: url('{{ SITEURL }}/{{ article.featured_image }}')"
+            {% endif %}
+        >
+            <div class="post-title">
+                {{ article.title }}
+                {% if article.summary %}
+                <div class="post-subtitle">
+                    {{ article.summary }}
+                </div>
+                {% endif %}
+                <div class="post-meta">
+                    {% if article.date %}
+                    <time itemprop="datePublished">
+                        {{ article.date.strftime('%B %d, %Y') }}
+                    </time>
+                    {% endif %}
+
+                    {% if article.category %}
+                        <i class="material-icons" style="">folder</i>
+                        <a href="{{ SITEURL }}/category/{{ article.category|lower }}">{{ article.category }}</a>
+                        &nbsp;
+                    {% endif %}
+
+                    {% if article.tags %}
+                        <i class="material-icons" style="">label</i>
+                        {% for tag in article.tags %}
+                            <a href="{{ SITEURL }}/tag/{{ tag|lower }}">{{ tag }}</a>
+                            &nbsp;
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if article.content|wordcount %}
+                        <i class="material-icons" style="">schedule</i>
+                        {{ article.content|wordcount // 180 }} min read.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="post-body-wrapper">
+            <div class="post-body">
+                {{ article.content }}
+                {% if article.modified %}
+                <HR width="100%" id="EOF">
+                <p style="color:#777;">Last modified on {{ article.modified.strftime('%B %d, %Y') }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <nav class="post-pagination">
+            {% if article.next_article %}
+            <a class="newer-posts" href="{{ SITEURL }}/{{ article.next_article.url }}">
+                Next<br>{{ article.next_article.title }}
+            </a>
+            {% else %}
+            <a class="newer-posts">
+                Next<br>No Newer Posts
+            </a>
+            {% endif %}
+
+            {% if article.prev_article %}
+            <a class="older-posts" href="{{ SITEURL }}/{{ article.prev_article.url }}">
+                Previous<br>{{ article.prev_article.title }}
+            </a>
+            {% else %}
+            <a class="older-posts">
+                Previous<br>No Older Posts
+            </a>
+            {% endif %}
+        </nav>
+
+        <div class="post-comment-wrapper">
+            {% if article.metadata.get('comments', True) %}
+                <!-- Insert comment system here -->
+            {% else %}
+            <p style="opacity: 0.6" align="center">
+                <small>Comments are disabled for this post</small>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

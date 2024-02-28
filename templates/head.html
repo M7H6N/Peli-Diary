@@ -1,0 +1,36 @@
+<head>
+<title>{{ TITLE }}</title>
+
+{% set description = DESCRIPTION %}
+{% if IS_HOME %}
+  {% set description = SITE_DESCRIPTION %}
+{% endif %}
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="{{ description }}">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+<!-- open-graph and twitter-cards could be handled with Pelican plugins like pelican-open_graph -->
+
+<!-- Favicon -->
+{% if FAVICON %}
+<link rel="icon" href="{{ SITEURL }}/{{ FAVICON }}">
+{% endif %}
+
+<!-- Stylesheets -->
+{% if not DISABLE_DARKMODE %}
+<link rel="stylesheet" href="{{ SITEURL }}/theme/static/css/dark-mode.css" media="screen">
+{% else %}
+<link rel="stylesheet" href="{{ SITEURL }}/theme/static/css/journal.css" media="screen">
+{% endif %}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+
+<!-- Additional scripts and conditional logic based on your site's needs -->
+
+</head>

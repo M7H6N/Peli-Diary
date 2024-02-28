@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    {% include "head.html" %}
+    <body>
+        <div id="app">
+            {% include "mobile-header.html" %}
+            <!-- mobile header -->
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+                    {% block main %}{% endblock %}
+                </div>
+            </div>
+
+            {% include "sidebar.html" %}
+            {% include "extrabar.html" %}
+
+            {% include "mobile-footer.html" %}
+            <!-- mobile footer -->
+        </div>
+        {% include "journal.html" %}
+        <!-- Compatibility script inclusion -->
+        <script src="{{ SITEURL }}/theme/js/journal.js"></script>
+    </body>
+</html>
